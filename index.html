@@ -592,6 +592,12 @@ b.addEventListener("mouseleave",hb);b.addEventListener("focusin",hb);b.addEventL
 window.addEventListener("hashchange",function(){setTimeout(hb,260)});
 u()})();
 </script>
+<script>
+(function(){var a=document.querySelector(".bar .brand");if(!a)return;
+a.addEventListener("click",function(e){if(e.metaKey||e.ctrlKey||e.shiftKey||e.button!==0)return;e.preventDefault();
+try{history.replaceState(null,"","#top")}catch(x){}
+try{location.reload()}catch(x){location.hash="top";window.scrollTo(0,0)}})})();
+</script>
 
 </body>
 </html>
