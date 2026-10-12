@@ -342,7 +342,7 @@ h1,h2,h3,h4,.hero h1,.pj-head h1,.card h3,.sc h3,.ps strong,.career strong,.sec-
 
 <script>
 var P = [
- {id:"dami", t:"AI오더에이전트 ‘담이’", sub:"대화·음성 주문 UX 설계", yr:"2026", cover:4, from:4, to:13,
+ {id:"dami", t:"AI오더에이전트 ‘담이’", sub:"대화·음성 주문 UX 설계", yr:"2026", cover:"c-dami", pre:["c-dami"], from:4, to:13,
   tags:["AI UX","B2B 이커머스"], cat:["ai","ecom"],
   stats:[["첫 AI 서비스","차별화상회 론칭"],["2026.05.19","정식 배포 (1차 범위)"]],
   head:"차별화상회 AI 오더 에이전트 도입, 대화형 주문 경험 설계",
@@ -441,7 +441,7 @@ var app=document.getElementById("app");
 var filter="all";
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function pad(n){return n<10?"0"+n:""+n}
-function img(n){return "img/s"+pad(n)+".webp"}
+function img(n){return typeof n==="string"?"img/"+n+".webp":"img/s"+pad(n)+".webp"}
 function card(p){
   p=loc(p);var X=T();
   return '<a class="card" href="#'+p.id+'"><div class="cv"><img src="'+img(p.cover)+'" alt="'+esc(p.t)+' '+X.cover+'" loading="lazy"></div><div class="tx"><h3>'+esc(p.t)+'</h3><p>'+esc(p.sub)+'</p><time class="pd">'+esc(p.yr)+'</time></div></a>';
@@ -471,6 +471,7 @@ function row(k,v){var X=T();return '<div class="crow"><small>'+k+'</small><div c
 function pcase(p){
   var X=T();p=loc(p);
   var imgs=[];for(var i=p.from;i<=p.to;i++)imgs.push(i);
+  if(p.pre)imgs=p.pre.concat(imgs);
   if(p.extra)imgs=imgs.concat(p.extra);
   var others=P.filter(function(x){return x.id!==p.id}).slice(0,3);
   app.innerHTML=
