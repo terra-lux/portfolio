@@ -124,8 +124,8 @@ button{font:inherit;color:inherit}
 @media (prefers-reduced-motion:reduce){.card:hover{transform:none}}
 .card .tx{padding:20px}
 .card .cv{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--chip)}
-.card .cv img{width:100%;height:100%;object-fit:cover;object-position:left top;display:block;transition:transform .5s ease}
-.card:hover .cv img{transform:scale(1.035)}
+.card .cv img,.card .cv video{width:100%;height:100%;object-fit:cover;object-position:left top;display:block;transition:transform .5s ease}
+.card:hover .cv img,.card:hover .cv video{transform:scale(1.035)}
 .card .yr{position:absolute;left:10px;top:10px;background:var(--surface);color:var(--fg);font:600 12px/1.65 var(--f-display);padding:1px 10px;border-radius:999px}
 .card h3{font-size:16.5px;font-weight:300;line-height:1.65;letter-spacing:-.01em;color:var(--fg);margin:0 0 4px;word-break:keep-all}
 .card p{margin:0;color:var(--muted);font-size:14px;font-weight:300;line-height:1.65}
@@ -222,7 +222,7 @@ footer{border-top:1px solid var(--line);padding-block:60px 36px;color:var(--mute
 .owner small{color:var(--muted);font-size:13px;line-height:1.65}
 .pj-body{display:grid;grid-template-columns:minmax(0,1fr) 64px;gap:20px;align-items:start}
 .mods{min-width:0;max-width:1400px;margin-inline:auto;width:100%;overflow:hidden;background:var(--surface)}
-.mods img{display:block;width:100%;height:auto;aspect-ratio:16/9}
+.mods img,.mods video{display:block;width:100%;height:auto;aspect-ratio:16/9}
 .fab{position:sticky;top:calc(84px + env(safe-area-inset-top,0px));display:grid;gap:12px;justify-items:center}
 .fab button{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:var(--surface);cursor:pointer;display:grid;place-items:center;font-size:11px;line-height:1.1;padding:0;text-align:center}
 .fab button{transition:border-color .4s ease}
@@ -369,7 +369,7 @@ var P = [
   did:["기획·개발과 워크샵을 진행해 데모 뼈대를 만들고 데모 프로토타입 제작","본사 UT(매장매출·매장관리 파트) 진행 후 지표와 정보 배치 개선","전체 매장 매출, 이슈 매장 모니터링, 매장 상세(홈·매출) 화면 디자인","Primitive → Semantic → Component 3단 토큰 체계와 예외·에러 정의"],
   nums:[["5개사","파일럿 가맹본부 (목표 대비 167%)"],["538개","연동 매장 (영업 중 588개 중 91.5%)"],["2025.10","첫 정식 유료 계약"]],
   result:"Build, Show, Listen, Redraw를 출시 전까지 반복해 ‘본부가 실제로 쓰는 화면’으로 좁혔습니다. 성과 수치는 팀 성과이며 기준일은 2026.05.20입니다."},
- {id:"irs", t:"차별화장부 1.0", sub:"채널별 매출 통합 · 운영 대시보드 설계", yr:"2025", cover:45, from:45, to:58,
+ {id:"irs", t:"차별화장부 1.0", sub:"채널별 매출 통합 · 운영 대시보드 설계", yr:"2025", cover:"c-irs.mp4", pre:["c-irs.mp4"], from:45, to:58,
   tags:["B2B SaaS","대시보드"], cat:["saas","data"],
   stats:[["4.8배","월평균 신규 설정 고객"],["50 → 237곳","누적 설정 고객"]],
   head:"채널별 매출 통합 및 운영 대시보드 설계",
@@ -441,10 +441,12 @@ var app=document.getElementById("app");
 var filter="all";
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function pad(n){return n<10?"0"+n:""+n}
+function isv(n){return typeof n==="string"&&/\.mp4$/.test(n)}
+function media(n,alt,lazy){if(isv(n))return '<video poster="'+img(n.replace(/\.mp4$/,"-poster.webp"))+'" muted loop autoplay playsinline preload="metadata" aria-label="'+alt+'"><source src="'+img(n.replace(/\.mp4$/,".webm"))+'" type="video/webm"><source src="'+img(n)+'" type="video/mp4"></video>';return '<img src="'+img(n)+'" alt="'+alt+'" '+(lazy?'loading="lazy"':"")+'>'}
 function img(n){return typeof n==="string"?"img/"+n+(/\./.test(n)?"":".webp"):"img/s"+pad(n)+".webp"}
 function card(p){
   p=loc(p);var X=T();
-  return '<a class="card" href="#'+p.id+'"><div class="cv"><img src="'+img(p.cover)+'" alt="'+esc(p.t)+' '+X.cover+'" loading="lazy"></div><div class="tx"><h3>'+esc(p.t)+'</h3><p>'+esc(p.sub)+'</p><time class="pd">'+esc(p.yr)+'</time></div></a>';
+  return '<a class="card" href="#'+p.id+'"><div class="cv">'+media(p.cover,esc(p.t)+' '+X.cover,1)+'</div><div class="tx"><h3>'+esc(p.t)+'</h3><p>'+esc(p.sub)+'</p><time class="pd">'+esc(p.yr)+'</time></div></a>';
 }
 function pkey(p){if(p.last)return"0000.00";var m=String(p.period).match(/\d{4}\.\d{2}/g);return m?m[m.length-1]:"0000.00"}
 function grid(){
@@ -477,7 +479,7 @@ function pcase(p){
   app.innerHTML=
   '<a class="back" href="#top">'+X.back+'</a>'+
   '<article class="pj"><header class="pj-head"><h1>'+esc(p.t)+'</h1><div class="owner"><span class="av">HC</span><div><b>Hyeonju Choe</b><small>Product Designer · '+p.yr+' · '+p.tags.join(" · ")+'</small></div></div></header>'+
-  '<div class="pj-wrap"><div class="pj-body"><div class="mods">'+imgs.map(function(n,i){return '<img src="'+img(n)+'" alt="'+esc(p.t)+' '+(i+1)+'/'+imgs.length+'" '+(i>1?'loading="lazy"':'')+'>'}).join("")+'</div>'+
+  '<div class="pj-wrap"><div class="pj-body"><div class="mods">'+imgs.map(function(n,i){return media(n,esc(p.t)+' '+(i+1)+'/'+imgs.length,i>1)}).join("")+'</div>'+
   '<div class="fab" aria-label="'+X.ft+'"><a class="av" href="#contact" data-nav="contact" title="Contact" aria-label="Contact">HC</a><button type="button" data-act="info" title="'+X.fi+'" aria-label="'+X.fi+'">'+FI.info+'</button><button type="button" data-act="link" title="'+X.fl+'" aria-label="'+X.fl+'">'+FI.link+'</button><button type="button" data-act="top" title="'+X.ftop+'" aria-label="'+X.ftop+'">'+FI.top+'</button></div></div>'+
   '<section class="desc" id="pinfo"><div><h2>Overview</h2><p><strong>'+esc(p.head)+'</strong></p><h2>'+X.prob+'</h2><p>'+esc(p.problem)+'</p><h2>'+X.did+'</h2><ul>'+p.did.map(function(d){return '<li>'+esc(d)+'</li>'}).join("")+'</ul><h2>'+X.res+'</h2><p>'+esc(p.result)+'</p>'+
   (p.link?'<a class="ext" href="'+p.link[0]+'" target="_blank" rel="noopener">'+p.link[1]+' ↗</a>':'')+'</div>'+
