@@ -304,6 +304,11 @@ body{overflow-wrap:break-word}
 h1,h2,h3,h4,.hero h1,.pj-head h1,.card h3,.sc h3,.ps strong,.career strong,.sec-lb,.desc h2,.blk h4{font-weight:600!important}
 
 /* lang + theme controls */
+.nav a.nxl{display:inline-flex;align-items:center;gap:4px}
+.nav a.nxl svg{flex:none;opacity:.75}
+@media (max-width:620px){.nav a.nxl .fx{display:none}.nav a.nxl{gap:2px;padding-inline:8px}.nav a.nxl svg{width:12px;height:12px}}
+@media (max-width:440px){.nav a.nxl .dk{display:none}.nav a.nxl{padding-inline:6px}.nav a.nxl svg{width:16px;height:16px;opacity:1}}
+@media (max-width:380px){.nav a{padding-inline:7px}}
 .nav .tb{padding:0;display:inline-flex;align-items:center;justify-content:center;width:40.5px;height:40.5px;border-radius:8px}
 .nav .tb svg{display:block}
 .lg{position:relative}
@@ -344,6 +349,7 @@ h1,h2,h3,h4,.hero h1,.pj-head h1,.card h3,.sc h3,.ps strong,.career strong,.sec-
     <a href="#top" data-nav="work">Work</a>
     <a href="#about" data-nav="about">About</a>
     <a href="#contact" data-nav="contact">Contact</a>
+    <a class="nxl" href="https://www.figma.com/deck/oLIcsWKoq4cpCBvba6G7qv" target="_blank" rel="noopener noreferrer" aria-label="Full Deck (opens in a new tab)"><span class="fx">Full </span><span class="dk">Deck</span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
     <div class="lg" id="lg">
       <button class="lgb" id="lgb" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Language"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.6 2.7 4 5.9 4 9.5s-1.4 6.8-4 9.5c-2.6-2.7-4-5.9-4-9.5s1.4-6.8 4-9.5z"/></svg><span id="lgl">KO</span><svg class="chv" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
       <ul class="lgm" id="lgm" role="listbox" hidden><li role="option" data-lang="en">English</li><li role="option" data-lang="ko">한국어</li></ul>
@@ -498,7 +504,7 @@ function pcase(p){
   '<div class="pj-wrap"><div class="pj-body"><div class="mods">'+imgs.map(function(n,i){return media(n,esc(p.t)+' '+(i+1)+'/'+imgs.length,i>1)}).join("")+'</div>'+
   '<div class="fab" aria-label="'+X.ft+'"><a class="av" href="#contact" data-nav="contact" title="Contact" aria-label="Contact">HC</a><button type="button" data-act="info" title="'+X.fi+'" aria-label="'+X.fi+'">'+FI.info+'</button><button type="button" data-act="link" title="'+X.fl+'" aria-label="'+X.fl+'">'+FI.link+'</button><button type="button" data-act="top" title="'+X.ftop+'" aria-label="'+X.ftop+'">'+FI.top+'</button></div></div>'+
   '<section class="desc" id="pinfo"><div><h2>Overview</h2><p><strong>'+esc(p.head)+'</strong></p><h2>'+X.prob+'</h2><p>'+esc(p.problem)+'</p><h2>'+X.did+'</h2><ul>'+p.did.map(function(d){return '<li>'+esc(d)+'</li>'}).join("")+'</ul><h2>'+X.res+'</h2><p>'+esc(p.result)+'</p>'+
-  (p.link?'<a class="ext" href="'+p.link[0]+'" target="_blank" rel="noopener">'+p.link[1]+' ↗</a>':'')+'</div>'+
+  (p.link?'<a class="nxl" href="'+p.link[0]+'" target="_blank" rel="noopener">'+p.link[1]+' ↗</a>':'')+'</div>'+
   '<aside class="pinfo"><h2>Results</h2><div class="nums">'+p.nums.map(function(n){return '<div><b>'+esc(n[0])+'</b><span>'+esc(n[1])+'</span></div>'}).join("")+'</div>'+
   '<dl class="dl"><dt>'+X.per+'</dt><dd>'+esc(p.period)+'</dd><dt>'+X.rol+'</dt><dd>'+esc(p.role)+'</dd><dt>'+X.plat+'</dt><dd>'+esc(p.dev)+'</dd><dt>'+X.tool+'</dt><dd>'+esc(p.tools)+'</dd></dl><h2>Tags</h2><div class="chips">'+p.tags.map(function(t){return '<span class="tag">'+esc(t)+'</span>'}).join("")+'</div></aside></section>'+
   '<section class="more"><h2>More by Hyeonju Choe</h2><div class="grid">'+others.map(card).join("")+'</div></section></div></article>';
