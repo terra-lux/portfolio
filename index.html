@@ -364,7 +364,7 @@ h1,h2,h3,h4,.hero h1,.pj-head h1,.card h3,.sc h3,.ps strong,.career strong,.sec-
 
 <script>
 var P = [
- {id:"dami", t:"AI오더에이전트 ‘담이’", sub:"대화·음성 주문 UX 설계", yr:"2026", cover:"t-dami4.mp4", pre:["c-dami6.mp4","dm3-02","dm4-03","dm5-04","dm5-05","dm5-06","dm2-07","dm2-08","dm2-09","dm2-10","dm2-11","dm2-12","dm2-13","dm2-14","dm2-15"], from:1, to:0,
+ {id:"dami", t:"AI오더에이전트 ‘담이’", sub:"대화·음성 주문 UX 설계", yr:"2026", cover:"t-dami4.mp4", pre:["c-dami6.mp4","dm3-02","dm4-03","dm5-04","dm5-05","dm5-06","dm5-07","dm2-08","dm2-09","dm2-10","dm2-11","dm2-12","dm2-13","dm2-14","dm2-15"], from:1, to:0,
   tags:["AI UX","B2B 이커머스"], cat:["ai","ecom"],
   stats:[["첫 AI 서비스","차별화상회 론칭"],["2026.05.19","정식 배포 (1차 범위)"]],
   head:"차별화상회 AI 오더 에이전트 도입, 대화형 주문 경험 설계",
@@ -464,10 +464,10 @@ var filter="all";
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function pad(n){return n<10?"0"+n:""+n}
 function isv(n){return typeof n==="string"&&/\.mp4$/.test(n)}
-var DIM={"dm3-02":[2800,1574],"dm3-02-en":[2800,1574],"dm4-03":[2800,1574],"dm4-03-en":[2800,1574],"dm5-04":[2800,1830],"dm5-04-en":[2800,1830],"dm5-05":[2800,1764],"dm5-05-en":[2800,1764],"dm5-06":[2800,3726],"dm5-06-en":[2800,3726],"dm2-07":[2800,4660],"dm2-08":[2800,2654],"dm2-09":[2800,2782],"dm2-10":[2800,2042],"dm2-11":[2800,2042],"dm2-12":[2800,2620],"dm2-13":[2800,4250],"dm2-14":[2800,3598],"dm2-15":[2800,2226],"c-dami6.mp4":[2800,1924],"c-dami6-en.mp4":[2800,1924],"t-dami4.mp4":[1920,1080]};
+var DIM={"dm3-02":[2800,1574],"dm3-02-en":[2800,1574],"dm4-03":[2800,1574],"dm4-03-en":[2800,1574],"dm5-04":[2800,1830],"dm5-04-en":[2800,1830],"dm5-05":[2800,1764],"dm5-05-en":[2800,1764],"dm5-06":[2800,3726],"dm5-06-en":[2800,3726],"dm5-07":[2800,3714],"dm5-07-en":[2800,3714],"dm2-08":[2800,2654],"dm2-09":[2800,2782],"dm2-10":[2800,2042],"dm2-11":[2800,2042],"dm2-12":[2800,2620],"dm2-13":[2800,4250],"dm2-14":[2800,3598],"dm2-15":[2800,2226],"c-dami6.mp4":[2800,1924],"c-dami6-en.mp4":[2800,1924],"t-dami4.mp4":[1920,1080]};
 var OV={"dm2-12":{v:"dm2-12-home.mp4",x:930,y:338,w:390,h:844,r:40,W:1400,H:1310}};
 function vsrc(n){return '<source src="'+img(n.replace(/\.mp4$/,".webm"))+'" type="video/webm"><source src="'+img(n)+'" type="video/mp4">'}
-var ENIMG={"dm3-02":"dm3-02-en","dm4-03":"dm4-03-en","dm5-04":"dm5-04-en","dm5-05":"dm5-05-en","dm5-06":"dm5-06-en","c-dami6.mp4":"c-dami6-en.mp4"};
+var ENIMG={"dm3-02":"dm3-02-en","dm4-03":"dm4-03-en","dm5-04":"dm5-04-en","dm5-05":"dm5-05-en","dm5-06":"dm5-06-en","dm5-07":"dm5-07-en","c-dami6.mp4":"c-dami6-en.mp4"};
 function media(n,alt,lazy){if(lang==="en"&&ENIMG[n])n=ENIMG[n];
   var d=DIM[n],ar=d?"":' style="aspect-ratio:16/9"';
   if(isv(n))return '<video poster="'+img(n.replace(/\.mp4$/,"-poster.webp"))+'" muted loop autoplay playsinline preload="metadata" aria-label="'+alt+'"'+(d?' style="aspect-ratio:'+d[0]+'/'+d[1]+'"':ar)+'>'+vsrc(n)+'</video>';
